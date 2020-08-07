@@ -5,8 +5,9 @@ typedef struct
 	int weight;
 	int parent, lchild, rchild;
 }HTNode, *HuffmanCode;
+//huffman树的存储表示 
 
-void huffman(HTNode *w, int num);
+void huffman(HTNode *w, int num);//Huffman树的排序 
 
 int main()
 {
@@ -15,20 +16,22 @@ int main()
 	
 	printf("请输入结点个数：");
 	scanf("%d",&num);
-	HTNode *w = (HuffmanCode)malloc((2 * num - 1) * sizeof(HTNode));
-	for(i = 0;i < 2 * num - 1;i++)
+	HTNode *w = (HuffmanCode)malloc((2 * num - 1) * sizeof(HTNode));//动态分配内存给数组 
+	for(i = 0;i < 2 * num - 1;i++)//初始化双亲、左右孩子为-1 
 	{
 		(w + i)->parent = -1;
 		(w + i)->lchild = -1;
 		(w + i)->rchild = -1;
 	}
 	printf("请输入%d个权值：",num);
-	for(i=0;i<num;i++)
+	for(i=0;i<num;i++)//直接将权值放入构造的Huffman树中 
 	{
 		scanf("%d",&input);
 		(w + i)->weight = input;
 	}
-	huffman(w, num);
+	huffman(w, num);//将Huffman树的地址传入 
+	
+	return 0; 
 }
 void huffman(HTNode *w,int num)
 {
@@ -37,7 +40,7 @@ void huffman(HTNode *w,int num)
 	int Num, j, i;
 	Num = num - 1;
 	
-	for(j = 0;j < Num;j++)
+	for(j = 0;j < Num;j++)//进行排序整理 
 	{
 		min_1 = 100; 
 		for(i = 0;i < num;i++)
@@ -71,7 +74,7 @@ void huffman(HTNode *w,int num)
 		num++;	
 	}
 	printf("weight parent lchild rchild\n");
-	for(i = 0;i < num;i++)
+	for(i = 0;i < num;i++)//输出排序好的Huffman树 
 		printf("%3d%7d%7d%7d\n",(w + i)->weight, (w +i)->parent,(w + i)->lchild,(w + i)->rchild);
 	
 }
